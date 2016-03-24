@@ -1,0 +1,36 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'eclipse'
+
+mainClassName = 'junxiao.design.runDesign'
+
+defaultTasks 'printingMessage'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile "joda-time:joda-time:2.2"
+    testCompile "junit:junit:4.12"
+    testCompile "org.mockito:mockito-core:1.+"
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.7'
+}
+
+task printingHello << {
+    System.out.println "Hello..."
+}
+
+task printingMessage (dependsOn:printingHello) << {
+    System.out.println "testing..."
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'junxiao.design.runDesign'
+    }
+}
